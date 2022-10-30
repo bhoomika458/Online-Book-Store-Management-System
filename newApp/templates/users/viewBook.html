@@ -1,0 +1,15 @@
+<h1>{{book.title}}</h1>
+<h2>{{book.author}}</h2>
+
+<form action="{% url 'addToCart' book.book_id %}">
+    <select name='store_id'>
+    {% for seller in sellers %}
+        <option value="{{seller.store_email.store_id}}">
+            Store Name: {{seller.store_email.store_name}} <br>
+            Price: {{seller.price}}
+        </option>
+    {% endfor %}
+    </select> <br>
+    <input name= 'no_of_copies' type = 'number'>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add To Cart</button> 
+</form>

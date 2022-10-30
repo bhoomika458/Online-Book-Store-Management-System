@@ -1,0 +1,36 @@
+{% if primary_address %}
+    <h4>Your Primary Address:</h4>
+    Address Line 1:{{primary_address.address_line1}}<br>
+    Address Line 2:{{primary_address.address_line2}}<br>
+    City: {{primary_address.city}}<br>
+    Zipcode: {{primary_address.zip_code}}<br>
+    Address_no: {{primary_address.address_no}}<br>
+    <form class="form-inline my-2 my-lg-0" action="{% url 'orderPlaced' primary_address.address_no %}" method= "GET">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Place Order</button>
+    </form> 
+{% else %}
+    <h4>You have No Primary Address</h4>
+{% endif %}
+{% if other_address %}
+    <h5>Your other Address</h5>
+        {% for address in other_address %}
+            Address Line 1: {{address.address_line1}}<br>
+            Address Line 2: {{address.address_line2}}<br>
+            City: {{address.city}}<br>
+            Zipcode: {{address.zip_code}}<br>
+            <form class="form-inline my-2 my-lg-0" action="{% url 'userAddAsPrimaryAddress' address.address_id %}" method= "GET">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add as Primary Address</button>
+            </form>
+        {% endfor %}
+{% endif %}
+{% if not primary_address and not other_address %}
+    <h5>Please add an address</h5>
+{% endif %}
+
+
+<form class="form-inline my-2 my-lg-0" action="{% url 'userAddAddress' %}" method= "GET">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add Another Address</button>
+</form> 
+
+
+
