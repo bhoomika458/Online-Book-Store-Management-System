@@ -1,0 +1,21 @@
+
+
+{% block content %}
+  <h1>Book List</h1>
+  {% if book_list %}
+  <ul>
+    {% for book in book_list %}
+      <li>
+        {{ book.title }} ({{book.author}})
+        <a href="{% url 'viewBook' book.book_id %}">View Book </a>
+        <td><form method="get"  action="{% url 'removeBook' book.book_id %}">{% csrf_token %}                                
+          <br><button class="button" style="width: 20%">Delete</button><br><br>
+          </form>
+        </td>
+      </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+    <p>There are no books in the library.</p>
+  {% endif %}       
+{% endblock %}
